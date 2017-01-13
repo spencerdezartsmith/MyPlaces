@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Places-->
         <scene sceneID="fKh-hW-KJW">
             <objects>
                 <tableViewController id="DeB-Ti-mPW" sceneMemberID="viewController">
@@ -32,10 +32,10 @@
                             <outlet property="delegate" destination="DeB-Ti-mPW" id="KAS-pJ-EKu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="RIu-Ug-K9s">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="OgZ-D1-Kgj">
+                    <navigationItem key="navigationItem" title="Places" id="RIu-Ug-K9s" userLabel="Places">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="OgZ-D1-Kgj">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="zAH-3Q-Wt7"/>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="toMap" id="zAH-3Q-Wt7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -60,10 +60,10 @@
             </objects>
             <point key="canvasLocation" x="-1231" y="137"/>
         </scene>
-        <!--Map View-->
+        <!--Map-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Map View" id="BYZ-38-t0r" customClass="ViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Map" id="BYZ-38-t0r" customClass="ViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
