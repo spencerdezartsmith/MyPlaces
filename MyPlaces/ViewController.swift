@@ -103,16 +103,24 @@ class ViewController: UIViewController, MKMapViewDelegate {
                         }
                     }
                 }
+                
+                if title == "" {
+                    
+                    title = "Added \(NSDate())"
+                    
+                }
+                
+                let annotation = MKPointAnnotation()
+                
+                annotation.coordinate = newCoodinate
+                
+                annotation.title = title
+                
+                self.map.addAnnotation(annotation)
             
             })
             
-            let annotation = MKPointAnnotation()
-            
-            annotation.coordinate = newCoodinate
-            
-            annotation.title = title
-            
-            map.addAnnotation(annotation)
+          
             
         }
         
