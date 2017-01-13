@@ -117,6 +117,9 @@ class ViewController: UIViewController, MKMapViewDelegate {
                 annotation.title = title
                 
                 self.map.addAnnotation(annotation)
+                
+                places.append(["name": title, "lat": "\(newCoodinate.latitude)", "lon": "\(newCoodinate.longitude)"])
+                
             
             })
             
