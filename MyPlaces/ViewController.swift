@@ -17,6 +17,12 @@ class ViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.longpress(gestureRecognizer:)))
+        
+        longPressRecognizer.minimumPressDuration = 2
+        
+        map.addGestureRecognizer(longPressRecognizer)
+        
         if activePlace != -1 {
             
             // Get details for chosen place to display on the map
@@ -61,6 +67,56 @@ class ViewController: UIViewController, MKMapViewDelegate {
             }
             
         }
+    }
+    
+    func longpress(gestureRecognizer: UIGestureRecognizer) {
+        
+        if gestureRecognizer.state == UIGestureRecognizerState.began {
+        
+            let touchPoint = gestureRecognizer.location(in: self.map)
+            
+            let newCoodinate = self.map.convert(touchPoint, toCoordinateFrom: self.map)
+            
+            let newLocation: CLLocation = CLLocation(latitude: newCoodinate.latitude, longitude: newCoodinate.longitude)
+            
+            var title = ""
+            
+            CLGeocoder().reverseGeocodeLocation(newLocation, completionHandler: { (placemarks, error) in
+            
+                if error != nil {
+                    
+                    print(error)
+                    
+                } else {
+                    
+                    if let placemark = placemarks?[0] {
+                        
+                        if placemark.subThoroughfare != nil {
+                            
+                            title += placemark.subThoroughfare! + " "
+                            
+                        }
+                        
+                        if placemark.thoroughfare != nil {
+                            
+                            title += placemark.thoroughfare!
+                        }
+                    }
+                }
+            
+            })
+            
+            let annotation = MKPointAnnotation()
+            
+            annotation.coordinate = newCoodinate
+            
+            annotation.title = title
+            
+            map.addAnnotation(annotation)
+            
+        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
