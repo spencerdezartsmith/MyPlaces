@@ -8,10 +8,23 @@
 
 import UIKit
 
+var places = [Dictionary<String, String>()]
+
 class PlacesViewController: UITableViewController {
 
+    @IBOutlet var table: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if places.count == 1 && places[0].count == 0 {
+            
+            places.remove(at: 0)
+            
+            places.append(["name": "Taj Majal", "lat": "27.175277", "lon": "78.042128"])
+        }
+        
+        table.reloadData()
 
     }
 
@@ -29,15 +42,19 @@ class PlacesViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 4
+        return places.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
+        
+        if places[indexPath.row]["name"] != nil {
 
-        cell.textLabel?.text = "Row \(indexPath.row)"
+            cell.textLabel?.text = places[indexPath.row]["name"]
+            
+        }
 
         return cell
     }
