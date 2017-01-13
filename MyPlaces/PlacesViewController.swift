@@ -18,6 +18,10 @@ class PlacesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
         if places.count == 1 && places[0].count == 0 {
             
             places.remove(at: 0)
