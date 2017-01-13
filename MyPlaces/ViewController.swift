@@ -29,29 +29,28 @@ class ViewController: UIViewController, MKMapViewDelegate {
                         
                         if let lon = places[activePlace]["lon"] {
                             
-                            let latitude: CLLocationDegrees = Double(lat)!
+                            if let latitude: CLLocationDegrees = Double(lat) {
                             
-                            let longitude: CLLocationDegrees = Double(lon)!
-                            
-                            let latDelta: CLLocationDegrees = 0.03
-                            
-                            let lonDelta: CLLocationDegrees = 0.03
-                            
-                            let span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
-                            
-                            let location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                            
-                            let region: MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
-                            
-                            map.setRegion(region, animated: true)
-                            
-                            let annotation = MKPointAnnotation()
-                            
-                            annotation.title = name
-                            
-                            annotation.coordinate = location
-                            
-                            map.addAnnotation(annotation)
+                                if let longitude: CLLocationDegrees = Double(lon) {
+                                
+                                    let span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
+                                    
+                                    let location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                                    
+                                    let region: MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
+                                    
+                                    map.setRegion(region, animated: true)
+                                    
+                                    let annotation = MKPointAnnotation()
+                                    
+                                    annotation.title = name
+                                    
+                                    annotation.coordinate = location
+                                    
+                                    map.addAnnotation(annotation)
+                                    
+                                }
+                            }
                             
                         }
                         
