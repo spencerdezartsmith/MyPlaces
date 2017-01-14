@@ -93,7 +93,6 @@ class PlacesViewController: UITableViewController {
             
             tableView.deleteRows(at: [indexPath], with: .fade)
             
-            
         }
     }
 

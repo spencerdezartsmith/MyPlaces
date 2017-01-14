@@ -9,9 +9,10 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     @IBOutlet var map: MKMapView!
+    var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +24,15 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
         map.addGestureRecognizer(longPressRecognizer)
         
-        if activePlace != -1 {
+        if activePlace == -1 {
             
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+            
+        } else {
+        
             // Get details for chosen place to display on the map
             
             if places.count > activePlace {
@@ -67,6 +75,18 @@ class ViewController: UIViewController, MKMapViewDelegate {
             }
             
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
+        
+        let region = MKCoordinateRegion(center: location, span: span)
+        
+        self.map.setRegion(region, animated: true)
+        
     }
     
     func longpress(gestureRecognizer: UIGestureRecognizer) {
