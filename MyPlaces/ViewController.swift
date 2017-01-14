@@ -140,6 +140,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 
                 places.append(["name": title, "lat": "\(newCoodinate.latitude)", "lon": "\(newCoodinate.longitude)"])
                 
+                UserDefaults.standard.set(places, forKey: "places")
+                
             
             })
             

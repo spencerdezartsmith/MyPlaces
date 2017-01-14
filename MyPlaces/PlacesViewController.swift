@@ -22,11 +22,19 @@ class PlacesViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        if let tempPlaces = UserDefaults.standard.object(forKey: "places") as? [Dictionary<String, String>] {
+            
+            places = tempPlaces
+            
+        }
+        
         if places.count == 1 && places[0].count == 0 {
             
             places.remove(at: 0)
             
             places.append(["name": "Taj Majal", "lat": "27.175277", "lon": "78.042128"])
+            
+            UserDefaults.standard.set(places, forKey: "places")
         }
         
         activePlace = -1
@@ -90,6 +98,8 @@ class PlacesViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             places.remove(at: indexPath.row)
+            
+            UserDefaults.standard.set(places, forKey: "places")
             
             tableView.deleteRows(at: [indexPath], with: .fade)
             
